@@ -8,19 +8,43 @@
  * 5. Remove unnecessary comments as appropriate
  */
 
-public class ReclamationProject
-{
-    static String doit(String a,String b){
-        if (a.length() > b.length()){
-            String c = a; // TODO: set c to a
-            a=b; b=c;}
-        String r = (a.equals(b)) ? "" : ""; // I love the ternary operator!
-        /*
-         * For loop with i
-         */
-        for (int i = 0; i < a.length(); i++) { for (int j = a.length() - i; j > 0; j--) {
-                for (int k = 0; k < b.length()- j; k++) {
-                    r = (a.regionMatches(i, b, k, j) && j >r.length()) ? a.substring(i,i + j) : r; // Do it!
-                        }} // Ah yeah
-        } return r; }
+/**
+ *
+ */
+public class ReclamationProject {
+    /**
+     * @param firstInput - first string input
+     * @param secondInput - second strig input
+     * @return a common substring of both params
+     */
+    public String findCommonSubstring(final String firstInput, final String secondInput) {
+
+        String shortString = firstInput;
+        String longString = secondInput;
+
+        // switches if shortString is longer
+        if (shortString.length() > longString.length()) {
+            String tempString = shortString;
+            shortString = longString;
+            longString = tempString;
+        }
+
+        String outputString = "";
+
+        for (int shortIndex = 0; shortIndex < shortString.length(); shortIndex++) {
+            for (int shortLength = shortString.length() - shortIndex;
+                    shortLength > 0; shortLength--) {
+                for (int k = 0; k < longString.length() - shortLength; k++) {
+                    if (shortString.regionMatches(shortIndex, longString, k, shortLength)
+                            && shortLength > outputString.length()) {
+                        outputString = shortString.substring(shortIndex, shortIndex + shortLength);
+                    }
+
+                }
+
+            }
+        }
+        return outputString;
+
+    }
 }
